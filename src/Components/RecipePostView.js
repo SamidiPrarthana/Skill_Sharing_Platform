@@ -24,10 +24,30 @@ function Allpost(){
         }
     };
 
-    return(
-        <div>
+    useEffect(() => {
+        getFetchData();
 
+    }, []);
+
+    return(
+    
+        <div className="recipe-form-container">
+            <div className="form-header-r">
+            <h1><b>All Shared Post</b></h1>
+            </div>
+        <br />
+        <div className="gallery-r">
+        {dataList.map((recipe) =>(
+                <div key={recipe._id} className="content-r">
+                    <h3>{recipe.recipeName}</h3>
+                    <img src={recipe.mediaFiles} alt="recipe image" />
+                    <p>{recipe.recipeDescription}</p>
+                    <p>{recipe.tips}</p>
+                    <button type="button" onClick={() => navigate(`/update/${recipe._id}`)} className="btn1"> Update</button>
+                </div>
+            ))}
         </div>
+    </div>
     )
   
 };
