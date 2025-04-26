@@ -1,0 +1,132 @@
+body {
+    background-color: #f2ede3;
+    font-family: 'Helvetica Neue', sans-serif;
+    color: #444;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container-fluid{
+    background-color: rgba(140, 62, 16, 0.93);
+    height: 65px;
+  }
+
+  .nav-btn{
+    background-color: rgb(236, 229, 220);
+    color:  rgba(140, 62, 16, 0.93);
+    width: 120px;
+    height: 40px;
+    font-size: 15px;
+    font-weight: "50";
+    margin-left: 2px;
+    border-radius: 5px;
+    border: #ccc;
+
+  }
+  .img{
+    width: 1510px;
+    height: 500px;
+  }
+
+  /* Container for the form */
+.recipe-form-container {
+  width: 100%;
+  background-color: f1e5ca;
+  padding: 40px;
+}
+
+.form-header-r {
+  background-color: rgba(140, 62, 16, 0.93);
+  text-align: center;
+  padding: 8px;
+  margin-left: "35%";
+}
+
+.form-header-r h1 {
+  color: white;
+  font-size: 35px;
+}
+
+.form-container-r {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 40px;
+  background-color: #decfbb;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.form-row-r {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.form-column-r {
+  width: 100%;
+}
+
+.form-column1-r {
+  width: 100%;
+}
+
+.form-label-r {
+  color: #666563;
+  font-weight: bold;
+  font-size: 15px;
+  margin-bottom: 3px;
+  display: block;
+}
+
+
+/* Form Inputs, Textareas, Selects */
+.form-input-r {
+  width: 100%;
+  height: 48%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  color: #333;
+  font-size: 15px;
+  margin-bottom: 10px;
+  transition: all 0.3s ease-in-out;
+}
+/* Error message styling */
+.error-message-r {
+  color: #e74c3c;
+  font-size: 12px;
+  margin-top: 1px;
+  font-style: italic;
+}
+
+/* Focus style */
+.form-input:focus {
+  border-color: #101010;
+  outline: none;
+  box-shadow: 0 0 6px rgba(28, 28, 28, 0.4);
+}
+
+/* Submit Button */
+.form-button-r {
+  width: 100%;
+  padding: 10px;
+  background-color: rgb(165, 101, 10);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-top: 20px;
+}
+
+.form-button-r:hover {
+  background-color: #68390d;
+  transform: translateY(-2px);
+}
+
+  
+  
+  
