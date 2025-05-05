@@ -17,6 +17,15 @@ import EditPlan from './Page/EditPlan';
 
 
 
+import AddProgress from "./Page/Salindu/AddProgress";
+import DisplayProgress from "./Page/Salindu/DisplayProgress";
+import UpdateProgress from "./Page/Salindu/UpdateProgress";
+import MainProgress from "./Page/Salindu/MainProgress";
+import Register from "./Page/Salindu/Register";
+import Login from "./Page/Salindu/Login";
+import UserProfile from "./Page/Salindu/UserProfile";
+
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
@@ -36,6 +45,14 @@ root.render(
     <Route path="/PlanList" element={<PlansList/>} />
     <Route path='/EditPlan/:planId' element={<EditPlan />} />
 
+
+    <Route path="/addprogress" element={<AddProgress />} />
+          <Route path="/allprogresss" element={<DisplayProgress/>}/>
+          <Route path="/updateprogress/:id" element={<UpdateProgress/>}/>
+          <Route path="/mainprogress" element={<MainProgress/>}/>
+          <Route path="/register" element={<Register/>}/>
+          <Route path="/login" element={<Login/>}/>
+          <Route path="/userprofile" element={<UserProfile/>}/>
 
   </Routes>
 
