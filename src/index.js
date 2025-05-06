@@ -5,6 +5,12 @@ import App from './App';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import RecipeForm from './Page/RecipeForm';
 import PostView from './Page/PostView';
+import EditRecipe from './Page/EditRecipe';
+
+
+
+
+
 import PlanForm from './Page/PlanForm';
 import PlansList from './Page/PlansList';
 import EditPlan from './Page/EditPlan';
@@ -21,6 +27,11 @@ root.render(
     <Route path='/' element={<App />} />
     <Route path='/recipes' element={<RecipeForm />} />
     <Route path='/postview' element={<PostView />} />
+    <Route path="/update/:id" element={<EditRecipe  />} />
+
+
+
+
     <Route path="/Planform" element={<PlanForm />} />
     <Route path="/PlanList" element={<PlansList/>} />
     <Route path='/EditPlan/:planId' element={<EditPlan />} />
