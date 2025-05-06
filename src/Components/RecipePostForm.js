@@ -5,18 +5,21 @@ import api from '../api/api';
 
 
     const RecipePostForm = () => {
+      const [id,setId] = useState("");
         const [recipeName,setRecipeName] = useState("");
         const [recipeDescription, setRecipeDescription] = useState("");
         const [tips, setTips] = useState("");
         const [mediaFiles, setMediaFiles] = useState([]);
 
 //validation
+        const [idError, setidError] = useState("");
         const [recipeNameError, setrecipeNameError] = useState("");
         const [recipeDescriptionError, setrecipeDescriptionError] = useState("");
         const [tipsError, settipsError] = useState("");
         const [mediaFilesError, setmediaFilesError] = useState("");
 
         const clearForm = () => {
+          setId("");
           setRecipeName("");
           setRecipeDescription("");
           setTips("");
@@ -33,6 +36,14 @@ import api from '../api/api';
      
       
       //validation ckecks
+      if (!id){
+        setidError("ID is Required");
+        return;
+      } else {
+        setidError("");
+      }
+
+
       if (!recipeName){
         setrecipeNameError("Recipe Name is Required");
         return;
@@ -61,6 +72,7 @@ import api from '../api/api';
       }
 
      const newRecipe = {
+          id,
           recipeName,
           recipeDescription,
           tips,
@@ -88,6 +100,21 @@ import api from '../api/api';
           <div className="form-container-r"> 
           <form onSubmit={sendData} className="form" >
                 <div className="form-row-r">
+
+                       <div className="form-column1-r">
+                            <label htmlFor="id" className="form-label-r">
+                               Id
+                            </label>
+                            <input
+                                type="text"
+                                className="form-input-r id"
+                                id="id"
+                                value={id}
+                                onChange={(e) => setId(e.target.value)}
+                            />
+                            <div className="error-message-r">{idError}</div>
+                        </div>
+
                         <div className="form-column1-r">
                             <label htmlFor="recipeName" className="form-label-r">
                                Recipe Name
