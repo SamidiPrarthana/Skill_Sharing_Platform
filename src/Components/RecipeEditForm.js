@@ -1,98 +1,120 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
+import { useParams } from "react-router-dom";
 import "../Components/RecipeStyle.css";
 import axios from "axios";
 import api from '../api/api';
 
 
-function RecipePostForm() {
-     
-        const [recipeName,setRecipeName] = useState("");
-        const [recipeDescription, setRecipeDescription] = useState("");
-        const [tips, setTips] = useState("");
-        const [mediaFiles, setMediaFiles] = useState([]);
+function RecipeEditForm ()  {
+ 
+     const {id} = useParams();
+     const [formData, setFormData] = useState({
+          recipeName: "",
+          recipeDescription: "",
+          tips: "",
+          mediaFiles: "",
 
-//validation
-       
+          });
+        
         const [recipeNameError, setrecipeNameError] = useState("");
         const [recipeDescriptionError, setrecipeDescriptionError] = useState("");
         const [tipsError, settipsError] = useState("");
         const [mediaFilesError, setmediaFilesError] = useState("");
 
-        const clearForm = () => {
-          
-          setRecipeName("");
-          setRecipeDescription("");
-          setTips("");
-          setMediaFiles("");
-      };
-
-      const formData = new FormData();
 
 
-      const sendData = (e) =>{
-        e.preventDefault();
+useEffect(() => {
+        axios.get(`http://localhost:8080/api/v1/recipe/get/${id}`)
+            .then((response) => {
+              console.log("id:", id);
+              // Debugging the response
+                setFormData({
+                    recipeName: response.data.recipeName || "",
+                    recipeDescription: response.data.recipeDescription || "",
+                    tips: response.data.tips || "",
+                    mediaFiles: response.data.mediaFiles || "",
 
-        mediaFiles.forEach((file) => formData.append("mediaFiles", file));
-     
-      
-      //validation ckecks
+                });
+            })
+            .catch((error) => {
+                console.error("Error fetching item details:", error);
+            }); 
+    }, [id]);
+
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.id]: e.target.value,
+        });
+    };
+
+    const handleSubmit = (e) => {
+      e.preventDefault();
     
-
-      if (!recipeName){
+      // Validation
+      if (!formData.recipeName) {
         setrecipeNameError("Recipe Name is Required");
         return;
       } else {
         setrecipeNameError("");
       }
-
-      if (!recipeDescription.trim()){
+    
+      if (!formData.recipeDescription.trim()) {
         setrecipeDescriptionError("Recipe Description is Required");
         return;
       } else {
         setrecipeDescriptionError("");
       }
-      if (!tips){
+    
+      if (!formData.tips) {
         settipsError("Recipe Tip is Required");
         return;
       } else {
         settipsError("");
       }
-
-      if (!mediaFiles){
+    
+      if (!formData.mediaFiles || formData.mediaFiles.length === 0) {
         setmediaFilesError("Recipe photo is Required");
         return;
       } else {
         setmediaFilesError("");
       }
+    
+      // FormData to send files
+      const updatedForm = new FormData();
+      updatedForm.append("recipeName", formData.recipeName);
+      updatedForm.append("recipeDescription", formData.recipeDescription);
+      updatedForm.append("tips", formData.tips);
+    
+      for (let i = 0; i < formData.mediaFiles.length; i++) {
+        updatedForm.append("mediaFiles", formData.mediaFiles[i]);
+      }
+    
+      axios
+        .put(`http://localhost:8080/api/v1/recipe/update/${id}`, updatedForm, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .then((response) => {
+          alert("Recipe updated successfully!");
+        })
+        .catch((error) => {
+          console.error("Error updating recipe:", error);
+          alert("Update failed");
+        });
+    };
+    
 
-     const newRecipe = {
-          
-          recipeName,
-          recipeDescription,
-          tips,
-          mediaFiles,
-      };
-
-       axios 
-          .post("http://localhost:8080/api/v1/recipe/save",newRecipe)
-          .then(() => {
-           alert("Recipe sharing");
-           clearForm();
-       })
-         .catch((err) => {
-          alert(err);
-      });
-
-  };
         return (
           <div className="recipe-form-container">
             <div className="form-header-r">
-            <h1><b>Recipe Sharing Platform</b></h1>
+            <h1><b>Update Recipes</b></h1>
             </div>
             
             <br/><br/>
           <div className="form-container-r"> 
-          <form onSubmit={sendData} className="form" >
+          <form onSubmit={handleSubmit} className="form" >
                 <div className="form-row-r">
 
                         <div className="form-column1-r">
@@ -103,8 +125,8 @@ function RecipePostForm() {
                                 type="text"
                                 className="form-input-r recipe name"
                                 id="recipeName"
-                                value={recipeName}
-                                onChange={(e) => setRecipeName(e.target.value)}
+                                value={formData.recipeName}
+                                onChange={handleChange}
                             />
                             <div className="error-message-r">{recipeNameError}</div>
                         </div>
@@ -118,8 +140,8 @@ function RecipePostForm() {
                         <textarea  style={{width:"100%",height:"65%"}}
                             className="form-input-r description"
                             id="recipeDescription"
-                            value={recipeDescription}
-                            onChange={(e) => setRecipeDescription(e.target.value)}
+                            value={formData.recipeDescription}
+                            onChange={handleChange}
                         />
                         <div className="error-message-r">{recipeDescriptionError}</div>
                     </div>
@@ -134,8 +156,8 @@ function RecipePostForm() {
                                 type="text"
                                 className="form-input-r tips"
                                 id="tips"
-                                value={tips}
-                                onChange={(e) => setTips(e.target.value)}
+                                value={formData.tips}
+                                onChange={handleChange}
                             />
                          <div className="error-message-r">{tipsError}</div>
                     </div>
@@ -152,7 +174,7 @@ function RecipePostForm() {
                            className="form-input-r file"
                            id="mediaFiles"
                            multiple accept="image/*,video/*"
-                           onChange={(e) => setMediaFiles(Array.from(e.target.files))}
+                           onChange={handleChange}
                         />
 
                       <div className="error-message-r">{mediaFilesError}</div>
@@ -162,7 +184,7 @@ function RecipePostForm() {
 
                     <div className="form-column-r">
                         <button type="submit" className="form-button-r">
-                            Submit
+                            Update
                         </button>
                     </div>
           </form>
@@ -172,4 +194,4 @@ function RecipePostForm() {
         );
       };
       
-      export default RecipePostForm;
+      export default RecipeEditForm;
