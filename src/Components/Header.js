@@ -39,7 +39,7 @@ function Header(){
                         <span className="navbar-toggler-icon"></span>
                     </button>
                     <div className="collapse navbar-collapse" id="navbarNavDropdown">
-                        <ul className="navbar-nav" style={{ marginLeft: "40%" }}>
+                        <ul className="navbar-nav" style={{ marginLeft: "10%" }}>
                             <li className="nav-item">
                                 <button className="nav-btn" onClick={() => navigate("/")}>
                                     {" "}
@@ -54,6 +54,15 @@ function Header(){
                                 <button className="nav-btn" onClick={() => navigate("/recipes")}>
                                     <div className="nav-link_H">
                                    <b>Recipes</b> 
+                                    </div>
+                                </button>
+                            </li>
+
+                             <li className="nav-item" style={{ marginLeft: "10%" }}>
+                                <button className="nav-btn" onClick={() => navigate("/postview")}>
+                                    {" "}
+                                    <div className="nav-link_H">
+                                       <b>Post View </b> 
                                     </div>
                                 </button>
                             </li>
