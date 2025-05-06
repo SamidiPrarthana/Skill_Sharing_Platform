@@ -75,6 +75,15 @@ function Header(){
                                     </div>
                                 </button>
                             </li>
+                              <li className="nav-item" style={{ marginLeft: "10%" }}>
+                                <button className="nav-btn" onClick={() => navigate("/addprogress")}>
+                                    {" "}
+                                    <div className="nav-link_H">
+                                       <b>Learning Progress   </b> 
+                                    </div>
+                                </button>
+                            </li>
+
 
                             
 
