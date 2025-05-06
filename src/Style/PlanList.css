@@ -1,0 +1,236 @@
+/* Traditional, elegant styling for Plans List */
+.plans-list-container {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 2rem;
+    font-family: 'Georgia', serif;
+    color: #5a4a3a;
+  }
+  
+  .plans-list-heading {
+    color: #5a4a3a;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    font-weight: normal;
+    border-bottom: 1px solid #d4c9b8;
+    padding-bottom: 0.5rem;
+  }
+  
+  .plans-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .plan-card {
+    background-color: #f9f5f0;
+    border: 1px solid #d4c9b8;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .plan-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .plan-title {
+    color: #8a795d;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+    border-bottom: 1px solid #e0d6c2;
+    padding-bottom: 0.5rem;
+  }
+  
+  .plan-detail {
+    margin-bottom: 0.8rem;
+    line-height: 1.5;
+  }
+  
+  .plan-detail strong {
+    color: #7a6b52;
+    font-weight: normal;
+    font-style: italic;
+  }
+  
+  .no-plans-message {
+    text-align: center;
+    color: #7a6b52;
+    font-style: italic;
+    padding: 2rem;
+    background-color: #f9f5f0;
+    border-radius: 8px;
+    border: 1px dashed #d4c9b8;
+  }
+  
+  .loading-message,
+  .error-message {
+    text-align: center;
+    padding: 2rem;
+    font-size: 1.2rem;
+  }
+  
+  .loading-message {
+    color: #7a6b52;
+  }
+  
+  .error-message {
+    color: #a05250;
+    background-color: #f9eceb;
+    border: 1px solid #e8c9c8;
+    border-radius: 8px;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .plans-list {
+      grid-template-columns: 1fr;
+    }
+    
+    .plans-list-container {
+      padding: 1rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .plan-card {
+      padding: 1rem;
+    }
+    
+    .plan-title {
+      font-size: 1.1rem;
+    }
+  }
+  /* Back button styles */
+.back-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: none;
+    border: none;
+    color: #8a795d;
+    font-family: 'Georgia', serif;
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+  }
+  
+  .back-button:hover {
+    color: #5a4a3a;
+    transform: translateX(-3px);
+  }
+  
+  .back-arrow {
+    width: 18px;
+    height: 18px;
+    border-left: 2px solid #8a795d;
+    border-bottom: 2px solid #8a795d;
+    transform: rotate(45deg);
+    transition: all 0.3s ease;
+  }
+  
+  .back-button:hover .back-arrow {
+    border-color: #5a4a3a;
+    transform: rotate(45deg) translateX(-3px);
+  }
+
+  .plans-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .add-plan-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+  
+  .add-plan-button:hover {
+    background-color: #45a049;
+  }
+  
+  .no-plans-message .add-plan-button {
+    margin-top: 15px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Add these styles to your existing PlanList.css */
+
+.plan-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.edit-button {
+  color: #2196F3;
+}
+
+.edit-button:hover {
+  background-color: rgba(33, 150, 243, 0.1);
+}
+
+.delete-button {
+  color: #f44336;
+}
+
+.delete-button:hover {
+  background-color: rgba(244, 67, 54, 0.1);
+}
+
+.plan-card {
+  position: relative;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  gap: 10px;
+}
+
+.pagination button {
+  padding: 8px 12px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.pagination button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
