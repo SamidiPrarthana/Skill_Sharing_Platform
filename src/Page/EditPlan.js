@@ -42,7 +42,7 @@ const EditPlan = () => {
         e.preventDefault();
         try {
             await axios.put(`http://localhost:8080/api/v1/plan/update/${planId}`, plan);
-            navigate('/plans'); // Redirect to plans list after successful update
+            navigate('/PlanList'); // Redirect to plans list after successful update
         } catch (err) {
             setError('Failed to update plan');
         }
