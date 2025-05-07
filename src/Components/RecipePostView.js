@@ -37,7 +37,7 @@ function Allpost(){
           </div>
           <div className="gallery-r">
             {dataList.map((recipe) => (
-              <div key={recipe._id} className="content-r">
+              <div key={recipe.id} className="content-r">
                 <img src={recipe.mediaFiles} alt="recipe" className="recipe-img" />
                 <div className="recipe-text">
                   <h3>{recipe.recipeName}</h3>
@@ -46,7 +46,7 @@ function Allpost(){
                 </div>
                 <button
                   type="button"
-                  onClick={() => navigate(`/update/${recipe._}`)}
+                  onClick={() => navigate(`/update/${recipe.id}`)}
                   className="btn1"
                 >
                   Update
