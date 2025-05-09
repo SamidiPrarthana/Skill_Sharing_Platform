@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import{ useNavigate} from "react-router-dom";
 import "../Components/RecipeStyle.css";
 import axios from "axios";
 import api from '../api/api';
@@ -9,35 +10,34 @@ function RecipePostForm() {
         const [recipeName,setRecipeName] = useState("");
         const [recipeDescription, setRecipeDescription] = useState("");
         const [tips, setTips] = useState("");
-        const [mediaFiles, setMediaFiles] = useState([]);
+        const [file, setFile] = useState("");
+
+ 
+        const navigate=useNavigate();
 
 //validation
        
         const [recipeNameError, setrecipeNameError] = useState("");
         const [recipeDescriptionError, setrecipeDescriptionError] = useState("");
         const [tipsError, settipsError] = useState("");
-        const [mediaFilesError, setmediaFilesError] = useState("");
+        const [fileError,setfileError] = useState("");
+ 
 
         const clearForm = () => {
           
           setRecipeName("");
           setRecipeDescription("");
           setTips("");
-          setMediaFiles("");
+          setFile("");
+
       };
 
-      const formData = new FormData();
-
-
+ 
       const sendData = (e) =>{
         e.preventDefault();
 
-        mediaFiles.forEach((file) => formData.append("mediaFiles", file));
-     
       
       //validation ckecks
-    
-
       if (!recipeName){
         setrecipeNameError("Recipe Name is Required");
         return;
@@ -57,20 +57,23 @@ function RecipePostForm() {
       } else {
         settipsError("");
       }
-
-      if (!mediaFiles){
-        setmediaFilesError("Recipe photo is Required");
+      if (!file) {
+        setfileError("Recipe Photo is Required");
         return;
       } else {
-        setmediaFilesError("");
+        setfileError("");
       }
 
+
+      
      const newRecipe = {
           
           recipeName,
           recipeDescription,
           tips,
-          mediaFiles,
+          file,
+         
+          
       };
 
        axios 
@@ -89,7 +92,12 @@ function RecipePostForm() {
             <div className="form-header-r">
             <h1><b>Recipe Sharing Platform</b></h1>
             </div>
-            
+            <button className="back-button" 
+              onClick={() => navigate(`/`)}>
+          <span className="back-arrow"></span>
+          Back
+        </button>
+
             <br/><br/>
           <div className="form-container-r"> 
           <form onSubmit={sendData} className="form" >
@@ -141,30 +149,27 @@ function RecipePostForm() {
                     </div>
                     </div>
                     
-                    <div className="form-row-r">
-                    <div className="form-column-r">
-                        <label htmlFor="mediaFiles" className="form-label-r">
-                           Photo Upload
+         <div className="form-row-r">
+                   <div className="form-column-r">
+                   <label htmlFor="tips" className="form-label-r">
+                         Recipe Photo
                         </label>
-
-                        <input style={{width:"100%",height:"52%"}}
-                           type="file"
-                           className="form-input-r file"
-                           id="mediaFiles"
-                           multiple accept="image/*,video/*"
-                           onChange={(e) => setMediaFiles(Array.from(e.target.files))}
-                        />
-
-                      <div className="error-message-r">{mediaFilesError}</div>
-                    </div>
-                    </div>
+                            <input
+                              type="file"
+                              className="file-input file"
+                              accept="image/*"
+                              onChange={(e) => setFile(e.target.files[0])}
+                            />
+                            <div className="error-message-r">{fileError}</div>
+                   </div>
+               </div>
                  
-
                     <div className="form-column-r">
                         <button type="submit" className="form-button-r">
                             Submit
                         </button>
                     </div>
+                    
           </form>
           </div> 
           </div>
