@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from "react";
+import{ useNavigate} from "react-router-dom";
 import { useParams } from "react-router-dom";
 import "../Components/RecipeStyle.css";
 import axios from "axios";
@@ -7,21 +8,23 @@ import api from '../api/api';
 
 function RecipeEditForm ()  {
  
+
+      const navigate=useNavigate();
      const {id} = useParams();
+
      const [formData, setFormData] = useState({
           recipeName: "",
           recipeDescription: "",
           tips: "",
-          mediaFiles: "",
-
+          file:"",
           });
-        
+        const [file, setFile] = useState("");
+
         const [recipeNameError, setrecipeNameError] = useState("");
         const [recipeDescriptionError, setrecipeDescriptionError] = useState("");
         const [tipsError, settipsError] = useState("");
-        const [mediaFilesError, setmediaFilesError] = useState("");
-
-
+        const [fileError,setfileError] = useState("");
+      
 
 useEffect(() => {
         axios.get(`http://localhost:8080/api/v1/recipe/get/${id}`)
@@ -32,8 +35,8 @@ useEffect(() => {
                     recipeName: response.data.recipeName || "",
                     recipeDescription: response.data.recipeDescription || "",
                     tips: response.data.tips || "",
-                    mediaFiles: response.data.mediaFiles || "",
-
+                    file: response.data.file || "",
+ 
                 });
             })
             .catch((error) => {
@@ -72,39 +75,48 @@ useEffect(() => {
       } else {
         settipsError("");
       }
-    
-      if (!formData.mediaFiles || formData.mediaFiles.length === 0) {
-        setmediaFilesError("Recipe photo is Required");
+
+      if (!file) {
+        setfileError("Recipe photo is Required");
         return;
       } else {
-        setmediaFilesError("");
+        setfileError("");
       }
     
+      
       // FormData to send files
       const updatedForm = new FormData();
       updatedForm.append("recipeName", formData.recipeName);
       updatedForm.append("recipeDescription", formData.recipeDescription);
       updatedForm.append("tips", formData.tips);
+      updatedForm.append("file", file);
     
-      for (let i = 0; i < formData.mediaFiles.length; i++) {
-        updatedForm.append("mediaFiles", formData.mediaFiles[i]);
-      }
-    
-      axios
-        .put(`http://localhost:8080/api/v1/recipe/update/${id}`, updatedForm, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        })
-        .then((response) => {
-          alert("Recipe updated successfully!");
-        })
-        .catch((error) => {
-          console.error("Error updating recipe:", error);
-          alert("Update failed");
+
+      // If all fields are valid, proceed with sending data
+    axios.put(`http://localhost:8080/api/v1/recipe/update/${id}`, formData)
+    .then((Response) => {
+        console.log(Response.data);
+         alert("Recipe Updated");
+        //handle success
+        setFormData({
+          recipeName: "",
+          recipeDescription: "",
+          tips: "",
+          file:"",
         });
+    })
+   
+    .catch((error) => {
+        if (error.Response && error.Response.status === 404) {
+            console.error("Resource not found:", error);
+            //handle 404 error
+        } else {
+            console.error("Error updating recipe:", error);
+            //handle other errors
+        }
+    });
+     
     };
-    
 
         return (
           <div className="recipe-form-container">
@@ -112,6 +124,13 @@ useEffect(() => {
             <h1><b>Update Recipes</b></h1>
             </div>
             
+  <button className="back-button" 
+              onClick={() => navigate(`/postview`)}>
+          <span className="back-arrow"></span>
+          Back
+        </button>
+
+
             <br/><br/>
           <div className="form-container-r"> 
           <form onSubmit={handleSubmit} className="form" >
@@ -162,25 +181,21 @@ useEffect(() => {
                          <div className="error-message-r">{tipsError}</div>
                     </div>
                     </div>
-                    
-                    <div className="form-row-r">
-                    <div className="form-column-r">
-                        <label htmlFor="mediaFiles" className="form-label-r">
-                           Photo Upload
-                        </label>
 
-                        <input style={{width:"100%",height:"52%"}}
-                           type="file"
-                           className="form-input-r file"
-                           id="mediaFiles"
-                           multiple accept="image/*,video/*"
-                           onChange={handleChange}
-                        />
-
-                      <div className="error-message-r">{mediaFilesError}</div>
-                    </div>
-                    </div>
-                 
+                        <div className="form-row-r">
+                          <div className="form-column-r">
+                            <label htmlFor="photo" className="form-label-r">
+                              Recipe Photo
+                            </label>
+                            <input
+                              type="file"
+                              className="file-input file"
+                              accept="image/*"
+                              onChange={(e) => setFile(e.target.files[0])}
+                            />
+                            <div className="error-message-r">{fileError}</div>
+                          </div>
+                        </div>
 
                     <div className="form-column-r">
                         <button type="submit" className="form-button-r">
