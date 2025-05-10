@@ -8,8 +8,8 @@ const PlansList = () => {
   const [plans, setPlans] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const [currentPage, setCurrentPage] = useState(1); // ➡️ Add current page
-  const plansPerPage = 6; // ➡️ 6 plans per page
+  const [currentPage, setCurrentPage] = useState(1);
+  const plansPerPage = 6;
 
   const navigate = useNavigate();
 
@@ -47,11 +47,9 @@ const PlansList = () => {
     }
   };
 
-  // ➡️ Calculate pagination
   const indexOfLastPlan = currentPage * plansPerPage;
   const indexOfFirstPlan = indexOfLastPlan - plansPerPage;
   const currentPlans = plans.slice(indexOfFirstPlan, indexOfLastPlan);
-
   const totalPages = Math.ceil(plans.length / plansPerPage);
 
   const goToNextPage = () => {
@@ -62,13 +60,8 @@ const PlansList = () => {
     if (currentPage > 1) setCurrentPage(currentPage - 1);
   };
 
-  if (loading) {
-    return <div className="loading-message">Loading plans...</div>;
-  }
-
-  if (error) {
-    return <div className="error-message">{error}</div>;
-  }
+  if (loading) return <div className="loading-message">Loading plans...</div>;
+  if (error) return <div className="error-message">{error}</div>;
 
   return (
     <div className="plans-list-container">
@@ -97,19 +90,14 @@ const PlansList = () => {
             {currentPlans.map((plan) => (
               <li key={plan.planId} className="plan-card">
                 <div className="plan-actions">
-                  <button 
-                    className="icon-button edit-button"
-                    onClick={() => handleEditPlan(plan.planId)}
-                    title="Edit"
-                  >
+                  <button className="icon-button edit-button" onClick={() => handleEditPlan(plan.planId)} title="Edit">
                     <FaEdit />
                   </button>
-                  <button 
-                    className="icon-button delete-button"
-                    onClick={() => handleDeletePlan(plan.planId)}
-                    title="Delete"
-                  >
+                  <button className="icon-button delete-button" onClick={() => handleDeletePlan(plan.planId)} title="Delete">
                     <FaTrash />
+                  </button>
+                  <button className="icon-button view-button" onClick={() => navigate(`/PlanView/${plan.planId}`)} title="View">
+                    View
                   </button>
                 </div>
                 <h3 className="plan-title">{plan.planTitle}</h3>
@@ -122,7 +110,6 @@ const PlansList = () => {
             ))}
           </ul>
 
-          {/* ➡️ Pagination controls */}
           <div className="pagination">
             <button onClick={goToPrevPage} disabled={currentPage === 1}>
               Previous
