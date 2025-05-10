@@ -1,0 +1,112 @@
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { FaEdit, FaTrash } from 'react-icons/fa';
+import '../Style/PlanList.css';
+
+const PlansList = () => {
+  const [plans, setPlans] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const plansPerPage = 6;
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    fetchPlans();
+  }, []);
+
+  const fetchPlans = async () => {
+    try {
+      const response = await axios.get('http://localhost:8080/api/v1/plan/all');
+      setPlans(response.data);
+      setLoading(false);
+    } catch (err) {
+      setError('Failed to fetch plans');
+      setLoading(false);
+    }
+  };
+
+  const handleAddPlan = () => {
+    navigate('/Planform');
+  };
+
+  const handleEditPlan = (planId) => {
+    navigate(`/EditPlan/${planId}`);
+  };
+
+  const handleDeletePlan = async (planId) => {
+    if (window.confirm('Are you sure you want to delete this plan?')) {
+      try {
+        await axios.delete(`http://localhost:8080/api/v1/plan/delete/${planId}`);
+        fetchPlans();
+      } catch (err) {
+        setError('Failed to delete plan');
+      }
+    }
+  };
+
+  const indexOfLastPlan = currentPage * plansPerPage;
+  const indexOfFirstPlan = indexOfLastPlan - plansPerPage;
+  const currentPlans = plans.slice(indexOfFirstPlan, indexOfLastPlan);
+  const totalPages = Math.ceil(plans.length / plansPerPage);
+
+  const goToNextPage = () => {
+    if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+  };
+
+  const goToPrevPage = () => {
+    if (currentPage > 1) setCurrentPage(currentPage - 1);
+  };
+
+  if (loading) return <div className="loading-message">Loading plans...</div>;
+  if (error) return <div className="error-message">{error}</div>;
+
+  return (
+    <div className="plans-list-container">
+      <div className="plans-header">
+        <button className="back-button" onClick={() => navigate(-1)}>
+          <span className="back-arrow"></span>
+          Back
+        </button>
+        
+      </div>
+
+      <h2 className="plans-list-heading">Traditional Recipes Learning Plans</h2>
+
+      
+          <ul className="plans-list">
+            {currentPlans.map((plan) => (
+              <li key={plan.planId} className="plan-card">
+                <div className="plan-actions">
+                  
+                  <button className="icon-button view-button" onClick={() => navigate(`/PlanView/${plan.planId}`)} title="View">
+                    View
+                  </button>
+                </div>
+                <h3 className="plan-title">{plan.planTitle}</h3>
+                <p className="plan-detail"><strong>Main Ingredients:</strong> {plan.planMainIngredients}</p>
+                <p className="plan-detail"><strong>Description:</strong> {plan.planDescription}</p>
+                <p className="plan-detail"><strong>Dates:</strong> {plan.planStartDate} to {plan.planEndDate}</p>
+                <p className="plan-detail"><strong>Difficulty:</strong> {plan.planDifficulty}</p>
+                <p className="plan-detail"><strong>Category:</strong> {plan.planCategory}</p>
+              </li>
+            ))}
+          </ul>
+
+          <div className="pagination">
+            <button onClick={goToPrevPage} disabled={currentPage === 1}>
+              Previous
+            </button>
+            <span>Page {currentPage} of {totalPages}</span>
+            <button onClick={goToNextPage} disabled={currentPage === totalPages}>
+              Next
+            </button>
+          </div>
+        
+    </div>
+  );
+};
+
+export default PlansList;

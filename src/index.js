@@ -15,6 +15,9 @@ import PlanForm from './Page/PlanForm';
 import PlansList from './Page/PlansList';
 import EditPlan from './Page/EditPlan';
 import PlanView from './Page/PlanView';
+import Home from './Page/Home';
+import Login from './Page/Login';
+import PlanListBefore from './Page/PlanListBefore';
 
 
 
@@ -37,6 +40,9 @@ root.render(
     <Route path="/PlanList" element={<PlansList/>} />
     <Route path='/EditPlan/:planId' element={<EditPlan />} />
     <Route path="/PlanView/:planId" element={<PlanView />} />
+    <Route path="/home" element={<Home />} />
+    <Route path="/login" element={<Login />} />
+    <Route path="/PlanListBefore" element={<PlanListBefore />} />
 
 
   </Routes>
