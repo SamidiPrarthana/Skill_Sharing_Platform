@@ -1,11 +1,11 @@
-import Header from "../Components/Header"
+import Header1 from "../Components/Header1"
 import RecipePostView from "../Components/RecipePostView"
 
 
 function Recipes(){
     return(
         <div>
-            <Header />
+            <Header1 />
             
             <RecipePostView />
             
