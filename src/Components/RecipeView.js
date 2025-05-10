@@ -56,7 +56,7 @@ const deleteRecipe = async (id) => {
           </div>
 
   <button className="back-button" 
-              onClick={() => navigate(`/home`)}>
+              onClick={() => navigate(`/`)}>
           <span className="back-arrow"></span>
           Back
         </button>
@@ -65,23 +65,7 @@ const deleteRecipe = async (id) => {
 
               <div key={recipe.id} className="content-r">
 
-                <div className="button-container-icons">
-                  <button
-                    className="icon-button edit"
-                    title="Edit"
-                    onClick={() => navigate(`/update/${recipe.id}`)}
-                  >
-                   <FaEdit/>
-                    </button>
-               
-                  <button
-                    className="icon-button delete"
-                    title="Delete"
-                    onClick={() => deleteRecipe(recipe.id)}
-                  >
-                    <FaTrash/>
-                    </button>
-                </div>
+            
                 <img src={recipe.file} alt="recipe" className="recipe-img" />
                 <div className="recipe-text">
                   <h3>{recipe.recipeName}</h3>
