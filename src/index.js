@@ -14,6 +14,7 @@ import EditRecipe from './Page/EditRecipe';
 import PlanForm from './Page/PlanForm';
 import PlansList from './Page/PlansList';
 import EditPlan from './Page/EditPlan';
+import PlanView from './Page/PlanView';
 
 
 
@@ -35,6 +36,7 @@ root.render(
     <Route path="/Planform" element={<PlanForm />} />
     <Route path="/PlanList" element={<PlansList/>} />
     <Route path='/EditPlan/:planId' element={<EditPlan />} />
+    <Route path="/PlanView/:planId" element={<PlanView />} />
 
 
   </Routes>
