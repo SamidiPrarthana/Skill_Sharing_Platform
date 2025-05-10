@@ -56,7 +56,7 @@ const deleteRecipe = async (id) => {
           </div>
 
   <button className="back-button" 
-              onClick={() => navigate(`/home`)}>
+              onClick={() => navigate(`/`)}>
           <span className="back-arrow"></span>
           Back
         </button>

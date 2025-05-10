@@ -41,7 +41,7 @@ function Header1() {
                     <div className="collapse navbar-collapse" id="navbarNavDropdown">
                         <ul className="navbar-nav" style={{ marginLeft: "10%" }}>
                             <li className="nav-item">
-                                <button className="nav-btn" onClick={() => navigate("/home")}>
+                                <button className="nav-btn" onClick={() => navigate("/")}>
                                     <div className="nav-link_H"><b>Home</b></div>
                                 </button>
                             </li>

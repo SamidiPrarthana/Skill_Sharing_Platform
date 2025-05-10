@@ -48,7 +48,7 @@ function Header() {
                             
 
                             <li className="nav-item" style={{ marginLeft: "10%" }}>
-                                <button className="nav-btn" onClick={() => navigate("/recipes/:id")}>
+                                <button className="nav-btn" onClick={() => navigate("/postview")}>
                                     <div className="nav-link_H"><b>Post View</b></div>
                                 </button>
                             </li>

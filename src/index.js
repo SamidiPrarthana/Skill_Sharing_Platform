@@ -6,10 +6,6 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import RecipeForm from './Page/RecipeForm';
 import PostView from './Page/PostView';
 import EditRecipe from './Page/EditRecipe';
-import RecipeView from './Components/RecipeView';
-
-
-
 
 
 
@@ -25,8 +21,6 @@ import PlanListBefore from './Page/PlanListBefore';
 
 
 
-
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
@@ -38,8 +32,7 @@ root.render(
     <Route path='/recipes' element={<RecipeForm />} />
     <Route path='/postview' element={<PostView />} />
     <Route path="/update/:id" element={<EditRecipe  />} />
-    <Route path='/recipes/:id' element={<RecipeView />} />
-    
+
 
 
 

@@ -101,7 +101,7 @@ function RecipePostForm() {
           <b>Recipe Sharing Platform</b>
         </h1>
       </div>
-      <button className="back-button" onClick={() => navigate(`/home`)}>
+      <button className="back-button" onClick={() => navigate(`/`)}>
         <span className="back-arrow"></span>
         Back
       </button>
