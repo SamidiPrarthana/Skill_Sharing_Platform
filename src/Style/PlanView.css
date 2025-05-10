@@ -1,0 +1,227 @@
+/* PlanView.css */
+
+.plan-view-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  position: relative;
+  font-family: 'Georgia', 'Times New Roman', serif;
+}
+
+/* Parchment paper background with texture */
+.plan-view-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #f9f4e6;
+  background-image: url('https://www.transparenttextures.com/patterns/old-paper.png');
+  background-size: cover;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  z-index: -1;
+  border: 1px solid #d4b483;
+}
+
+/* Decorative border */
+.plan-view-container::after {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  border: 1px solid rgba(139, 90, 43, 0.3);
+  border-radius: 5px;
+  pointer-events: none;
+}
+
+.back-button {
+  background-color: #8b5a2b;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  font-family: 'Georgia', serif;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 3px;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.back-button:hover {
+  background-color: #5c3c10;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.back-button::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.back-button:hover::before {
+  opacity: 1;
+}
+
+.plan-details-card {
+  background-color: rgba(255, 253, 247, 0.85);
+  padding: 2.5rem;
+  border-radius: 5px;
+  border: 1px solid #d4b483;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative corner elements */
+.plan-details-card::before,
+.plan-details-card::after {
+  content: "";
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M0,0 L100,0 L100,100 L0,100 Z" fill="none" stroke="%23d4b483" stroke-width="2"/><path d="M20,20 L80,20 L80,80 L20,80 Z" fill="none" stroke="%23d4b483" stroke-width="1"/></svg>');
+  background-size: contain;
+  opacity: 0.3;
+}
+
+.plan-details-card::before {
+  top: 10px;
+  left: 10px;
+}
+
+.plan-details-card::after {
+  bottom: 10px;
+  right: 10px;
+  transform: rotate(180deg);
+}
+
+.plan-details-card h2 {
+  color: #5c3c10;
+  font-size: 2.2rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #d4b483;
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  position: relative;
+}
+
+.plan-details-card h2::after {
+  content: "❧";
+  position: absolute;
+  right: 0;
+  bottom: -15px;
+  color: #8b5a2b;
+  font-size: 1.5rem;
+}
+
+.plan-details-card p {
+  color: #3a3226;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin-bottom: 1.2rem;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.plan-details-card p::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #8b5a2b;
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.plan-details-card strong {
+  color: #5c3c10;
+  font-weight: bold;
+  font-family: 'Georgia', serif;
+}
+
+.download-pdf-button {
+  background-color: #5c3c10;
+  color: #fff;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  font-family: 'Georgia', serif;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 3px;
+  margin-top: 2rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.download-pdf-button:hover {
+  background-color: #3a3226;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.download-pdf-button::after {
+  content: "↓";
+  position: absolute;
+  right: 20px;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+}
+
+.download-pdf-button:hover::after {
+  transform: translateY(3px);
+}
+
+.error-message, .loading-message {
+  text-align: center;
+  padding: 2rem;
+  color: #5c3c10;
+  font-size: 1.2rem;
+  background-color: rgba(249, 244, 230, 0.8);
+  border-radius: 5px;
+  border: 1px solid #d4b483;
+}
+
+.error-message {
+  color: #8b0000;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .plan-view-container {
+    padding: 1rem;
+    margin: 1rem;
+  }
+  
+  .plan-details-card {
+    padding: 1.5rem;
+  }
+  
+  .plan-details-card h2 {
+    font-size: 1.8rem;
+  }
+}
+
+/* Add this to your index.html or import the font */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Georgia&display=swap');
