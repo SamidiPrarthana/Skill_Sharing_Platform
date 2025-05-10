@@ -1,21 +1,21 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "../Components/RecipeStyle.css";
-import Body from '../Components/Body';
+import Body from './Body';
 
-function Header() {
+function Header1() {
     const navigate = useNavigate();
 
     const handleLogout = () => {
-        // Clear auth token or user data from localStorage if needed
+        // Clear token or any stored login data if needed
         localStorage.removeItem("token");
-        navigate("/login");
+        navigate("/"); // Redirect to home
     };
 
     return (
         <div>
-            <p style={{ width:"50%", marginLeft: "27%", marginTop:"1%", color: "rgba(167, 76, 23, 0.93)", fontWeight: "1000" ,fontSize:"35px" }}>
-              Traditional Recipe Sharing & Learning
+            <p style={{ width: "50%", marginLeft: "27%", marginRight: "20%", marginTop: "1%", color: "rgba(167, 76, 23, 0.93)", fontWeight: "1000", fontSize: "35px" }}>
+                Traditional Recipe Sharing & Learning
             </p>
 
             <nav className="navbar navbar-expand-lg bg-body-tertiary" style={{ color: "red" }}>
@@ -25,6 +25,7 @@ function Header() {
                             <b>Recipe <span style={{ color: "white" }}>Management</span></b>
                         </h4>
                     </a>
+
                     <button
                         className="navbar-toggler"
                         type="button"
@@ -45,7 +46,11 @@ function Header() {
                                 </button>
                             </li>
 
-                            
+                            <li className="nav-item" style={{ marginLeft: "10%" }}>
+                                <button className="nav-btn" onClick={() => navigate("/recipes")}>
+                                    <div className="nav-link_H"><b>Recipes</b></div>
+                                </button>
+                            </li>
 
                             <li className="nav-item" style={{ marginLeft: "10%" }}>
                                 <button className="nav-btn" onClick={() => navigate("/postview")}>
@@ -54,21 +59,18 @@ function Header() {
                             </li>
 
                             <li className="nav-item" style={{ marginLeft: "10%" }}>
-                                <button className="nav-btn" onClick={() => navigate("/PlanListBefore")}>
+                                <button className="nav-btn" onClick={() => navigate("/PlanList")}>
                                     <div className="nav-link_H"><b>Learning Plans</b></div>
                                 </button>
                             </li>
                         </ul>
 
+                        {/* Logout Button */}
                         <div className="d-flex ms-auto" style={{ marginLeft: "auto" }}>
-                            <button className="nav-btn" onClick={() => navigate("/login")}>
-                                <div className="nav-link_H"><b>Login</b></div>
-                            </button>
-                            <button className="nav-btn ms-2" onClick={() => navigate("/signup")}>
-                                <div className="nav-link_H"><b>Signup</b></div>
+                            <button className="nav-btn logout-btn" onClick={handleLogout}>
+                                <div className="nav-link_H"><b>Logout</b></div>
                             </button>
                         </div>
-
                     </div>
                 </div>
             </nav>
@@ -76,4 +78,4 @@ function Header() {
     );
 }
 
-export default Header;
+export default Header1;
